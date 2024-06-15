@@ -1,9 +1,9 @@
 <?php
 	
 	//default database configuration
-	$servername = "localhost";
+	$servername = "db";
 	$username = "root";
-	$password = "";
+	$password = "my-secret-pw";
 	$dbname = "fosdb";
 
 ?>

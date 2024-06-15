@@ -1,14 +1,48 @@
-version: "3.8"
+version: '3.8'
+
 services:
   php:
-    build:
-      context: contextPath
+    build: 
+      context: ./
       dockerfile: Dockerfile
-    container_name: php-server
-    restart: always
+    container_name: php_container
     ports:
-      - 8080:80
+      - "8080:80"
     volumes:
-        - ./html:/var/www/html
-volumes:
-  html: {}
+      - ./html:/var/www/html
+    depends_on:
+      - db
+    networks:
+      - app-network
+    restart: always
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw
+      MYSQL_DATABASE: fosdb      
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+    restart: always
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - "9996:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: my-secret-pw
+    depends_on:
+      - db
+    networks:
+      - app-network
+    restart: always
+
+networks:
+  app-network:
+    driver: bridge
