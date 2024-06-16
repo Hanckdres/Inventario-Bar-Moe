@@ -1,5 +1,4 @@
 <?php
-
   include("../functions.php");
 
   if((!isset($_SESSION['uid']) && !isset($_SESSION['username']) && isset($_SESSION['user_level'])) ) 

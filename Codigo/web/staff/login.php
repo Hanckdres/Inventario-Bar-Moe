@@ -1,13 +1,12 @@
 <?php 
-	include("../functions.php");
+    include("../functions.php");
 
     if((isset($_SESSION['uid']) && isset($_SESSION['username']) && isset($_SESSION['user_level'])) )  {
-        if($_SESSION['user_level'] == "admin") {
+        if($_SESSION['user_level'] == "staff") {
           header("Location: index.php");
         }
     }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,7 +35,7 @@
 
     <div class="container">
       <div class="card card-login mx-auto mt-5">
-        <div class="card-header">Ingreso de Usuario Administrador</div>
+        <div class="card-header">Login de Empleados</div>
         <div class="card-body">
           <form id="loginform">
             <div class="form-group">
@@ -56,10 +55,11 @@
                 </div>
             <input type="submit" class="btn btn-primary btn-block" form="loginform" name="btnlogin" value="Ingresar" />
           </form>
-		   <a href="../index.php" class="btn btn-primary btn-block">Volver al Inicio</a>
+		  <a href="../index.php" class="btn btn-primary btn-block">Volver al Inicio</a>
         </div>
       </div>
     </div>
+	</div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>

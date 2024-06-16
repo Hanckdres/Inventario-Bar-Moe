@@ -1,5 +1,4 @@
 <?php
-
 	//Add new menu item
 	if (isset($_POST['addItem'])) {
 
@@ -29,6 +28,4 @@
 		}
 
 	}
-
-	
 ?>

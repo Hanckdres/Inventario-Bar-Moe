@@ -1,6 +1,5 @@
-
 <?php
-	include("../functions.php");
+	include("../functions.php");	
 
 	if((!isset($_SESSION['uid']) && !isset($_SESSION['username']) && isset($_SESSION['user_level'])) ) 
 		header("Location: login.php");
@@ -16,7 +15,7 @@
 	if ($_GET['cmd'] == 'currentorder')	{
 		
 		$displayOrderQuery =  "
-					SELECT o.orderID, m.menuName, OD.itemID,MI.menuItemName,OD.quantity,O.status
+					SELECT O.orderID, M.menuName, OD.itemID,MI.menuItemName,OD.quantity,O.status
 					FROM tbl_order O
 					LEFT JOIN tbl_orderdetail OD
 					ON O.orderID = OD.orderID
@@ -25,7 +24,7 @@
 					LEFT JOIN tbl_menu M
 					ON MI.menuID = M.menuID
 					WHERE O.status 
-					IN ( 'waiting','preparing','ready')
+					IN ('Esperando','Preparando','Listo')
 				";
 
 			if ($orderResult = $sqlconnection->query($displayOrderQuery)) {
@@ -62,15 +61,15 @@
 
 							$color = "badge badge-warning";
 							switch ($orderRow['status']) {
-								case 'waiting':
+								case 'Esperando':
 									$color = "badge badge-warning";
 									break;
 								
-								case 'preparing':
+								case 'Preparando':
 									$color = "badge badge-primary";
 									break;
 
-								case 'ready':
+								case 'Listo':
 									$color = "badge badge-success";
 									break;
 							}
@@ -81,27 +80,27 @@
 
 							//options based on status of the order
 							switch ($orderRow['status']) {
-								case 'waiting':
+								case 'Esperando':
 									
-									echo "<button onclick='editStatus(this,".$orderRow['orderID'].")' class='btn btn-outline-primary' value = 'preparing'>Preparando</button>";
-									echo "<button onclick='editStatus(this,".$orderRow['orderID'].")' class='btn btn-outline-success' value = 'ready'>Listo</button>";
+									echo "<button onclick='editStatus(this,".$orderRow['orderID'].")' class='btn btn-outline-primary' value = 'Preparando'>Preparando</button>";
+									echo "<button onclick='editStatus(this,".$orderRow['orderID'].")' class='btn btn-outline-success' value = 'Listo'>Listo</button>";
 
 									break;
 								
-								case 'preparing':
+								case 'Preparando':
 									
-									echo "<button onclick='editStatus(this,".$orderRow['orderID'].")' class='btn btn-outline-success' value = 'ready'>Listo</button>";
+									echo "<button onclick='editStatus(this,".$orderRow['orderID'].")' class='btn btn-outline-success' value = 'Listo'>Listo</button>";
 
 									break;
 
-								case 'ready':
+								case 'Listo':
 									
-									echo "<button onclick='editStatus(this,".$orderRow['orderID'].")' class='btn btn-outline-warning' value = 'finish'>Limpiar</button>";
+									echo "<button onclick='editStatus(this,".$orderRow['orderID'].")' class='btn btn-outline-warning' value = 'Completado'>Limpiar</button>";
 
 									break;
 							}
 
-							echo "<button onclick='editStatus(this,".$orderRow['orderID'].")' class='btn btn-outline-danger' value = 'cancelled'>Cancelar</button></td>";
+							echo "<button onclick='editStatus(this,".$orderRow['orderID'].")' class='btn btn-outline-danger' value = 'Cancelado'>Cancelar</button></td>";
 
 							echo "</td>";
 
@@ -124,7 +123,7 @@
 	//display current ready order list in staff index
 	if ($_GET['cmd'] == 'currentready') {
 
-		$latestReadyQuery = "SELECT orderID FROM tbl_order WHERE status IN ( 'finish','ready') ";
+		$latestReadyQuery = "SELECT orderID FROM tbl_order WHERE status IN ( 'completado','listo') ";
 
 		if ($result = $sqlconnection->query($latestReadyQuery)) {
 
@@ -137,5 +136,4 @@
             }
         }
 	}
-
 ?>

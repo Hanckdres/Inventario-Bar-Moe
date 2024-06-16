@@ -10,7 +10,3 @@ Contraseña "1234abcd.."
 ## Acceso Cajero
 Usuario "Andres"
 Contraseña "1234abcd.."
-
-## Acceso Cajero
-Usuario "Pepe"
-Contraseña "1234abcd.."

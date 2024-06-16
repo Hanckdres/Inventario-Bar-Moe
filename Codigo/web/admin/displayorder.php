@@ -1,4 +1,3 @@
-
 <?php
 	include("../functions.php");
 
@@ -14,20 +13,15 @@
 		die();
 
 	$displayOrderQuery =  "
-			SELECT o.orderID, m.menuName, OD.itemID,MI.menuItemName,OD.quantity,O.status
-			FROM tbl_order O
-			LEFT JOIN tbl_orderdetail OD
-			ON O.orderID = OD.orderID
-			LEFT JOIN tbl_menuitem MI
-			ON OD.itemID = MI.itemID
-			LEFT JOIN tbl_menu M
-			ON MI.menuID = M.menuID
-			WHERE O.status 
-			IN ( 'esperando','preparando','listo','completado')
-		";
+		SELECT O.orderID, M.menuName, OD.itemID, MI.menuItemName, OD.quantity, O.status
+		FROM tbl_order O
+		LEFT JOIN tbl_orderdetail OD ON O.orderID = OD.orderID
+		LEFT JOIN tbl_menuitem MI ON OD.itemID = MI.itemID
+		LEFT JOIN tbl_menu M ON MI.menuID = M.menuID
+		WHERE O.status IN ('esperando', 'preparando', 'listo', 'completado')
+	";
 
-	if ($orderResult = $sqlconnection->query($displayOrderQuery)) {
-			
+	if ($orderResult = $sqlconnection->query($displayOrderQuery)) {			
 		$currentspan = 0;
 
 		//if no order
@@ -35,10 +29,8 @@
 
 			echo "<tr><td class='text-center' colspan='7' >Lista de productos actualizada</td></tr>";
 		}
-
 		else {
 			while($orderRow = $orderResult->fetch_array(MYSQLI_ASSOC)) {
-
 				//basically count rowspan so no repetitive display id in each table row
 				$rowspan = getCountID($orderRow["orderID"],"orderID","tbl_orderdetail"); 
 
@@ -58,28 +50,26 @@
 				";
 
 				if ($currentspan == $rowspan) {
-
 					$color = "badge badge-warning";
 					switch ($orderRow['status']) {
 						case 'sirviendo':
 							$color = "badge badge-warning";
 							break;
 						
-						case 'preparing':
+						case 'preparando':
 							$color = "badge badge-primary";
 							break;
 
-						case 'ready':
+						case 'listo':
 							$color = "badge badge-success";
 							break;
 							
-						case 'finish':
+						case 'completado':
 							$color = "badge badge-success";
 							break;
 					}
 
-					echo "<td class='text-center' rowspan=".$rowspan."><span class='{$color}'>".$orderRow['status']."</span></td>";
-				
+					echo "<td class='text-center' rowspan=".$rowspan."><span class='{$color}'>".$orderRow['status']."</span></td>";				
 					echo "</td>";
 
 				}
@@ -90,5 +80,4 @@
 			}
 		}	
 	}
-
 ?>

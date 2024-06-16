@@ -1,9 +1,7 @@
-<?php
-	
+<?php	
 	//default database configuration
-	$servername = "db-1";
+	$servername = "proyecto-db-1";
 	$username = "root";
 	$password = "my-secret-pw";
 	$dbname = "fosdb";
-
 ?>

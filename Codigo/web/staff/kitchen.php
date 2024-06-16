@@ -10,15 +10,12 @@
   if($_SESSION['user_role'] != "Cajero") {
     echo ("<script>window.alert('Available for Cajero only!'); window.location.href='index.php';</script>");
     exit();
-  }
+  }  
   
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -75,7 +72,6 @@
 
         
         <?php
-
           if ($_SESSION['user_role'] == "Mesero") {
             echo '
             <li class="nav-item">
@@ -95,9 +91,7 @@
             </li>
             ';
           }
-
         ?>
-
         <li class="nav-item">
           <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
             <i class="fas fa-fw fa-power-off"></i>
@@ -137,11 +131,9 @@
 						<th class='text-center'>Cantidad</th>
 						<th class='text-center'>Estado</th>
 						<th class='text-center'>Opciones</th>
-					</thead>
-					
-					<tbody id="tblBodyCurrentOrder">
-						
-					</tbody>
+					</thead>					
+						<tbody id="tblBodyCurrentOrder">                      
+						</tbody>
 				</table>
             </div>
           </div>

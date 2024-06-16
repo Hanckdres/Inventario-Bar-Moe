@@ -11,10 +11,9 @@
   //echo $_SESSION['username'];
   //echo $_SESSION['user_level'];
   
-  $conexion=mysqli_connect('localhost','root','','fosdb');
+  $conexion=mysqli_connect('proyecto-db-1','root','my-secret-pw','fosdb');
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -152,11 +151,10 @@
   <?php 
   }
    ?>
-                    </thead>
+                    </thead>              
                     
-                    <tbody id="tblBodyCurrentOrder">
                       
-                    </tbody>
+                    
                   </table>
                 </div>
                 <div class="card-footer small text-muted"><i>Se refresca automáticamente cada 5 segundos</i></div>
@@ -241,9 +239,9 @@
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin.min.js"></script>
+    <script src="js/sb-admin.min.js"></script>  
 
-    <script type="text/javascript">
+	<script type="text/javascript">
 
     $( document ).ready(function() {
         refreshTableOrder();
@@ -257,7 +255,6 @@
     setInterval(function(){ refreshTableOrder(); }, 3000);
 
   </script>
-
 
   </body>
 

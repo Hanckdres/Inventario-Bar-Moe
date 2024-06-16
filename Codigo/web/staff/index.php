@@ -2,16 +2,18 @@
   include("../functions.php");
 
   if((!isset($_SESSION['uid']) && !isset($_SESSION['username']) && isset($_SESSION['user_level'])) ) 
-    header("Location: login.php");
-
-  if($_SESSION['user_level'] != "staff")
-    header("Location: login.php");
-
+  header("Location: login.php");
+  ob_start();
+  if ($_SESSION['user_level'] != "staff") {
+      header("Location: login.php");
+  }
   /*
   echo $_SESSION['uid'];
   echo $_SESSION['username'];
   echo $_SESSION['user_level'];
   */
+  
+  $conexion=mysqli_connect('proyecto-db-1','root','my-secret-pw','fosdb');
 
   function getStatus () {
       global $sqlconnection;
@@ -23,20 +25,15 @@
           return $row['status'];
         }
       }
-
       else {
           echo "Something wrong the query!";
           echo $sqlconnection->error;
       }
   }
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -89,11 +86,8 @@
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Panel de Control</span>
           </a>
-        </li>
-
-        
+        </li>        
         <?php
-
           if ($_SESSION['user_role'] == "Mesero") {
             echo '
             <li class="nav-item">
@@ -113,9 +107,7 @@
             </li>
             ';
           }
-
         ?>
-
         <li class="nav-item">
           <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
             <i class="fas fa-fw fa-power-off"></i>

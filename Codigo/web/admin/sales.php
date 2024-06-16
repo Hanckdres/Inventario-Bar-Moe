@@ -160,7 +160,7 @@
                     <tbody id="tblBodyCurrentOrder">
                       <?php 
                       $displayOrderQuery =  "
-                        SELECT o.orderID, m.menuName, OD.itemID,MI.menuItemName,OD.quantity,O.status,mi.price ,o.order_date
+                        SELECT O.orderID, M.menuName, OD.itemID,MI.menuItemName,OD.quantity,O.status,MI.price ,O.order_date
                         FROM tbl_order O
                         LEFT JOIN tbl_orderdetail OD
                         ON O.orderID = OD.orderID

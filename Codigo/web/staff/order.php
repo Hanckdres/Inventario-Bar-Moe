@@ -75,7 +75,6 @@
 
         
         <?php
-
           if ($_SESSION['user_role'] == "Mesero") {
             echo '
             <li class="nav-item">
@@ -95,7 +94,6 @@
             </li>
             ';
           }
-
         ?>
 
         <li class="nav-item">
